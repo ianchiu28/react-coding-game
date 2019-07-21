@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const delayTime = 1000;
+
 class Block extends React.Component {
   render() {
     return (
@@ -68,13 +70,13 @@ class Game extends React.Component {
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'C', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'D'
       ],
-      direction: 'W',
+      direction: 'N',
       script: [
         'move',
-        // 'turnLeft',
-        // 'move',
-        // 'turnRight',
-        // 'move'
+        'turnLeft',
+        'move',
+        'turnRight',
+        'move'
       ]
     }
   }
@@ -90,7 +92,7 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex < 0) {
-          return true
+          newCarIndex = -1;
         }
         break;
       case 'S':
@@ -98,7 +100,7 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex > 80) {
-          return true
+          newCarIndex = -1;
         }
         break;
       case 'E':
@@ -106,7 +108,7 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex % 9 === 0) {
-          return true
+          newCarIndex = -1;
         }
         break;
       case 'W':
@@ -114,9 +116,18 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex % 9 === 8) {
-          return true
+          newCarIndex = -1;
         }
         break;
+      default:
+        alert('Error: undefind direction!');
+        return;
+    }
+
+    // hit wall
+    if (newCarIndex === -1) {
+      alert('Game Over!');
+      return;
     }
 
     // update board
@@ -127,46 +138,94 @@ class Game extends React.Component {
     this.setState({
       board: newBoard
     });
-
-    // move success
-    return false;
   }
 
   actionTurnLeft() {
+    // calculate where to go
+    let direction = this.state.direction;
+    let newDirection;
+    switch (direction) {
+      case 'N':
+        newDirection = 'W';
+        break;
+      case 'S':
+          newDirection = 'E';
+        break;
+      case 'E':
+          newDirection = 'N';
+        break;
+      case 'W':
+          newDirection = 'S';
+        break;
+      default:
+        alert('Error: undefind direction!');
+    }
 
+    // update direction
+    this.setState({
+      direction: newDirection
+    });
   }
 
   actionTurnRight() {
+    // calculate where to go
+    let direction = this.state.direction;
+    let newDirection;
+    switch (direction) {
+      case 'N':
+        newDirection = 'E';
+        break;
+      case 'S':
+          newDirection = 'W';
+        break;
+      case 'E':
+          newDirection = 'S';
+        break;
+      case 'W':
+          newDirection = 'N';
+        break;
+      default:
+        alert('Error: undefind direction!');
+    }
 
+    // update direction
+    this.setState({
+      direction: newDirection
+    });
   }
 
   runScript() {
     const script = this.state.script.slice();
-    for (let i = 0; i < script.length; i++) {
-      let isHitWall;
-      switch (script[i]) {
-        case 'move':
-          isHitWall = this.actionMove();
-          break;
-        case 'turnLeft':
-          console.log('turn left');
-          break;
-        case 'turnRight':
-          console.log('turn right');
-          break;
-        default:
-          alert('Error: undefined script!');
-      }
 
-      if (isHitWall) {
-        alert('Game Over!');
-        return;
-      }
+    // stop interval
+    if (script.length === 0) {
+      clearInterval(this.timerId);
+      return;
     }
+
+    // run the first command
+    const command = script.shift();
+    switch (command) {
+      case 'move':
+        this.actionMove();
+        break;
+      case 'turnLeft':
+        this.actionTurnLeft();
+        break;
+      case 'turnRight':
+        this.actionTurnRight();
+        break;
+      default:
+        alert('Error: undefined script!');
+    }
+
+    this.setState({
+      script: script
+    });
   }
 
   handleButtonOnClick() {
-    this.runScript();
+    this.timerId = setInterval(() => this.runScript(), delayTime);
   }
 
   render() {
@@ -174,6 +233,7 @@ class Game extends React.Component {
       <div className='game'>
         <div className='game-info'>
           <h1>this is game-info</h1>
+          <h1>Direction: {this.state.direction}</h1>
           <button onClick={this.handleButtonOnClick}>Go!</button>
         </div>
         <div className='game-board'>
