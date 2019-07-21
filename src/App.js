@@ -30,11 +30,11 @@ class Board extends React.Component {
   }
 
   coordinateX(position) {
-    return (-4 + (position % 9)).toString();
+    return (' ' + (-4 + (position % 9)).toString()).slice(-2);
   }
 
   coordinateY(position) {
-    return (4 - parseInt(position / 9)).toString();
+    return (' ' + (4 - parseInt(position / 9)).toString()).slice(-2);
   }
 
   render() {
