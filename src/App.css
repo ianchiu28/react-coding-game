@@ -1,3 +1,20 @@
+html,body {
+    height: 100%
+}
+
+#root {
+    height: 100%
+}
+
+.game {
+    background: #BFDBF7;
+}
+
+.block {
+    width: 8vw;
+    height: 8vw;
+}
+
 /*.App {
   text-align: center;
 }

@@ -8,7 +8,7 @@ const delayTime = 1000;
 class Block extends React.Component {
 	render() {
     	return (
-      		<div className='border border-dark rounded'>
+      		<div className='block border border-dark rounded'>
         		{this.props.value + '(' + this.props.coordinateX + ',' + this.props.coordinateY + ')'}
       		</div>
     	);
@@ -231,7 +231,7 @@ class Game extends React.Component {
 
 	render() {
 	    return (
-      		<div className='game'>
+      		<div className='game h-100'>
         		<div className='game-info'>
           			<h1>this is game-info</h1>
           			<h1>Direction: {this.state.direction}</h1>
