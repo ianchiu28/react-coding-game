@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import async from 'async';
 
 class Block extends React.Component {
   render() {
