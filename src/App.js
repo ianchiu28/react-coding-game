@@ -71,6 +71,7 @@ class Board extends React.Component {
 class Game extends React.Component {
   constructor(props) {
     super(props);
+    this.handleButtonOnClick = this.handleButtonOnClick.bind(this);
     this.state = {
       defaultMap: [
         'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
@@ -82,12 +83,22 @@ class Game extends React.Component {
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'C', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'D'
+      ],
+      script: [
+        'move',
+        'turnLeft',
+        'turnRight'
       ]
     }
   }
 
+  runScript() {
+    const script = this.state.script.slice();
+    alert(script);
+  }
+
   handleButtonOnClick() {
-    alert('lalalaaaaa');
+    this.runScript();
   }
 
   render() {
