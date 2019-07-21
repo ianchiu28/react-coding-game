@@ -8,8 +8,13 @@ html,body {
 }
 
 .block {
-    width: 8vw;
-    height: 8vw;
+    width: 4vw;
+    height: 4vw;
+}
+
+.block-text {
+    margin-top: 50%;
+    color: rebeccapurple;
 }
 
 .road {
@@ -17,7 +22,11 @@ html,body {
 }
 
 .target {
-    background: #F7A072;
+    background: #A0DFFF;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%; 
+    background-image: url('image/battery.png');
 }
 
 .car {

@@ -1,12 +1,12 @@
 import React from 'react';
 import getScript from './Script';
-import logo from './logo.svg';
 import './App.css';
 
 const delayTime = 1000;
 
 class Block extends React.Component {
 	render() {
+		// class
 		let blockClass = 'block border border-dark rounded';
 		if (this.props.value === 'r') {
 			blockClass += ' road';
@@ -25,15 +25,25 @@ class Block extends React.Component {
 				case 'W':
 					blockClass += ' car-W';
 					break;
+				default:
+					alert('Error: undefind direction!');
 			}
 			
 		} else {
 			blockClass += ' target';
 		}
 
+		// text
+		let text = this.props.value;
+		if (text !== text.toUpperCase()) {
+			text = null;
+		}
+
     	return (
       		<div className={blockClass}>
-        		{this.props.value}
+				<h5 className='block-text text-center'>
+					{text}
+				</h5>
       		</div>
     	);
   	}
@@ -261,25 +271,6 @@ function App() {
 	return (
 	    <Game script={getScript()}/>
   	);
-
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
 }
 
 export default App;
