@@ -2,6 +2,16 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+class Block extends React.Component {
+  render() {
+    return (
+      <div className='border border-dark rounded'>
+        {this.props.value}
+      </div>
+    );
+  }
+}
+
 class Board extends React.Component {
   constructor(props) {
     super(props);
