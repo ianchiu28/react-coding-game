@@ -45,6 +45,7 @@ class Board extends React.Component {
     for (let i = 0; i < current.length; i++) {
       line.push(
         <Block
+          key={i.toString()}
           value={current[i]}
           coordinateX={this.coordinateX(i)}
           coordinateY={this.coordinateY(i)}
@@ -54,7 +55,7 @@ class Board extends React.Component {
       // new line
       let newLineIndex = i % 9;
       if (newLineIndex === 8) {
-        board.push(<div className='d-flex flex-row'>{line}</div>);
+        board.push(<div key={i.toString()} className='d-flex flex-row'>{line}</div>);
         line = [];
       }
     }
