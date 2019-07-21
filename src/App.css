@@ -7,6 +7,11 @@ html,body {
     background: #BFDBF7;
 }
 
+.header {
+    width: 500px;
+    font-size: 4vw;
+}
+
 .block {
     width: 4vw;
     height: 4vw;

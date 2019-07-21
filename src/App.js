@@ -2,7 +2,7 @@ import React from 'react';
 import getScript from './Script';
 import './App.css';
 
-const delayTime = 1000;
+const delayTime = 500;
 
 class Block extends React.Component {
 	render() {
@@ -255,9 +255,9 @@ class Game extends React.Component {
 	render() {
 	    return (
       		<div className='game h-100 d-flex flex-column justify-content-center align-items-center'>
-        		<div className='game-info mb-5'>
-          			<h1>DHC Go Go Car</h1>
-          			<button onClick={this.handleButtonOnClick}>Go!</button>
+        		<div className='game-info mb-5 d-flex flex-row'>
+          			<h1 className='header'>DHC Go Go Car</h1>
+          			<button className='btn btn-info w-25' onClick={this.handleButtonOnClick}>Go !</button>
         		</div>
         		<div className='game-board mb-5'>
           			<Board board={this.state.board} direction={this.state.direction}/>
