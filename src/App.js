@@ -25,7 +25,7 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: Array(81).fill(null)
+      board: props.map
     };
   }
 
@@ -45,7 +45,7 @@ class Board extends React.Component {
     for (let i = 0; i < current.length; i++) {
       line.push(
         <Block
-          value={' '}
+          value={current[i]}
           coordinateX={this.coordinateX(i)}
           coordinateY={this.coordinateY(i)}
         />
@@ -68,6 +68,23 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      defaultMap: [
+        'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'c', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'C', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'D'
+      ]
+    }
+  }
+
   render() {
     return (
       <div className='game'>
@@ -75,7 +92,7 @@ class Game extends React.Component {
           <h1>this is game-info</h1>
         </div>
         <div className='game-board'>
-          <Board />
+          <Board map={this.state.defaultMap}/>
         </div>
       </div>
     );
