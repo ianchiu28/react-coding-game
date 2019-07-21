@@ -12,6 +12,37 @@ html,body {
     height: 8vw;
 }
 
+.road {
+    background: #FFFFFF;
+}
+
+.target {
+    background: #F7A072;
+}
+
+.car {
+    background: #FFFFFF;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;    
+}
+
+.car-N {
+    background-image: url('image/car-N.png');
+}
+
+.car-E {
+    background-image: url('image/car-E.png');
+}
+
+.car-S {
+    background-image: url('image/car-S.png');
+}
+
+.car-W {
+    background-image: url('image/car-W.png');
+}
+
 /*.App {
   text-align: center;
 }

@@ -7,8 +7,32 @@ const delayTime = 1000;
 
 class Block extends React.Component {
 	render() {
+		let blockClass = 'block border border-dark rounded';
+		if (this.props.value === 'r') {
+			blockClass += ' road';
+		} else if (this.props.value === 'c') {
+			blockClass += ' car';
+			switch (this.props.direction) {
+				case 'N':
+					blockClass += ' car-N';
+					break;
+				case 'E':
+					blockClass += ' car-E';
+					break;
+				case 'S':
+					blockClass += ' car-S';
+					break;
+				case 'W':
+					blockClass += ' car-W';
+					break;
+			}
+			
+		} else {
+			blockClass += ' target';
+		}
+
     	return (
-      		<div className='block border border-dark rounded'>
+      		<div className={blockClass}>
         		{this.props.value + '(' + this.props.coordinateX + ',' + this.props.coordinateY + ')'}
       		</div>
     	);
@@ -24,7 +48,7 @@ class Board extends React.Component {
 		return (' ' + (4 - parseInt(position / 9)).toString()).slice(-2);
 	}
 
-	drawBoard(current) {
+	drawBoard(current, direction) {
 		// draw the board
 		let board = [], line = [];
 		for (let i = 0; i < current.length; i++) {
@@ -34,6 +58,7 @@ class Board extends React.Component {
 					value={current[i]}
 					coordinateX={this.coordinateX(i)}
 					coordinateY={this.coordinateY(i)}
+					direction={direction}
 				/>
 			);
 
@@ -49,7 +74,8 @@ class Board extends React.Component {
 
 	render() {
 		const current = this.props.board.slice();
-		return this.drawBoard(current);
+		const direction = this.props.direction;
+		return this.drawBoard(current, direction);
 	}
 }
 
@@ -227,13 +253,13 @@ class Game extends React.Component {
 	render() {
 	    return (
       		<div className='game h-100 d-flex flex-column justify-content-center align-items-center'>
-        		<div className='game-info'>
-          			<h1>this is game-info</h1>
+        		<div className='game-info mb-5'>
+          			<h1>DHC Go Go Car</h1>
           			<h1>Direction: {this.state.direction}</h1>
           			<button onClick={this.handleButtonOnClick}>Go!</button>
         		</div>
-        		<div className='game-board'>
-          			<Board board={this.state.board} />
+        		<div className='game-board mb-5'>
+          			<Board board={this.state.board} direction={this.state.direction}/>
         		</div>
       		</div>
     	);
