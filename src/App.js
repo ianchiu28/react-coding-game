@@ -76,6 +76,7 @@ class Game extends React.Component {
         'turnLeft',
         'move',
         'turnRight',
+        'move',
         'move'
       ]
     }
@@ -92,7 +93,7 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex < 0) {
-          newCarIndex = -1;
+          return true;
         }
         break;
       case 'S':
@@ -100,7 +101,7 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex > 80) {
-          newCarIndex = -1;
+          return true;
         }
         break;
       case 'E':
@@ -108,7 +109,7 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex % 9 === 0) {
-          newCarIndex = -1;
+          return true;
         }
         break;
       case 'W':
@@ -116,18 +117,12 @@ class Game extends React.Component {
 
         // hit wall
         if (newCarIndex % 9 === 8) {
-          newCarIndex = -1;
+          return true;
         }
         break;
       default:
         alert('Error: undefind direction!');
         return;
-    }
-
-    // hit wall
-    if (newCarIndex === -1) {
-      alert('Game Over!');
-      return;
     }
 
     // update board
@@ -195,7 +190,7 @@ class Game extends React.Component {
   }
 
   runScript() {
-    const script = this.state.script.slice();
+    let script = this.state.script.slice();
 
     // stop interval
     if (script.length === 0) {
@@ -205,9 +200,10 @@ class Game extends React.Component {
 
     // run the first command
     const command = script.shift();
+    let isHitWall;
     switch (command) {
       case 'move':
-        this.actionMove();
+        isHitWall = this.actionMove();
         break;
       case 'turnLeft':
         this.actionTurnLeft();
@@ -219,6 +215,13 @@ class Game extends React.Component {
         alert('Error: undefined script!');
     }
 
+    // hit the wall, game over
+    if (isHitWall) {
+      alert('Game Over!');
+      script = [];
+    }
+
+    // update script
     this.setState({
       script: script
     });
