@@ -27,49 +27,38 @@ class Board extends React.Component {
   render() {
     const current = this.state.board.slice();
 
-    let line1 = [];
-    for (let i = 0; i < 9; i++) {
-      line1.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line2 = [];
-    for (let i = 9; i < 18; i++) {
-      line2.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line3 = [];
-    for (let i = 18; i < 27; i++) {
-      line3.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line4 = [];
-    for (let i = 27; i < 36; i++) {
-      line4.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line5 = [];
-    for (let i = 36; i < 45; i++) {
-      line5.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line6 = [];
-    for (let i = 45; i < 54; i++) {
-      line6.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line7 = [];
-    for (let i = 54; i < 63; i++) {
-      line7.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line8 = [];
-    for (let i = 63; i < 72; i++) {
-      line8.push(<Block value={this.coordinate(i)}/>);
-    }
-
-    let line9 = [];
-    for (let i = 72; i < 81; i++) {
-      line9.push(<Block value={this.coordinate(i)}/>);
+    let line1 = [], line2 = [], line3 = [], line4 = [], line5 = [], line6 = [], line7 = [], line8 = [], line9 = [];
+    for (let i = 0; i < current.length; i++) {
+      let row = parseInt(i / 9);
+      switch (row) {
+        case 0:
+          line1.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 1:
+          line2.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 2:
+          line3.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 3:
+          line4.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 4:
+          line5.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 5:
+          line6.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 6:
+          line7.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 7:
+          line8.push(<Block value={this.coordinate(i)}/>);
+          break;
+        case 8:
+          line9.push(<Block value={this.coordinate(i)}/>);
+          break;
+      }
     }
 
     let newLine1 = <div className='d-flex flex-row'>{line1}</div>;
