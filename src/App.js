@@ -24,7 +24,7 @@ class Board extends React.Component {
     const current = this.state.board.slice();
     let draw = [];
     for (let i = 0, x = -4, y = 4; i < current.length; i++) {
-      draw.push(<div className='border border-dark rounded'>{x.toString() + ',' + y.toString()}</div>);
+      draw.push(x.toString() + ',' + y.toString());
       x++;
       if (x === 5) {
         x = -4;
@@ -32,106 +32,79 @@ class Board extends React.Component {
       }
     }
 
+    let line1 = [];
+    for (let i = 0; i < 9; i++) {
+      line1.push(<Block value={draw[i]}/>);
+    }
+
+    let line2 = [];
+    for (let i = 9; i < 18; i++) {
+      line2.push(<Block value={draw[i]}/>);
+    }
+
+    let line3 = [];
+    for (let i = 18; i < 27; i++) {
+      line3.push(<Block value={draw[i]}/>);
+    }
+
+    let line4 = [];
+    for (let i = 27; i < 36; i++) {
+      line4.push(<Block value={draw[i]}/>);
+    }
+
+    let line5 = [];
+    for (let i = 36; i < 45; i++) {
+      line5.push(<Block value={draw[i]}/>);
+    }
+
+    let line6 = [];
+    for (let i = 45; i < 54; i++) {
+      line6.push(<Block value={draw[i]}/>);
+    }
+
+    let line7 = [];
+    for (let i = 54; i < 63; i++) {
+      line7.push(<Block value={draw[i]}/>);
+    }
+
+    let line8 = [];
+    for (let i = 63; i < 72; i++) {
+      line8.push(<Block value={draw[i]}/>);
+    }
+
+    let line9 = [];
+    for (let i = 72; i < 81; i++) {
+      line9.push(<Block value={draw[i]}/>);
+    }
+
     return (
-      <div className=''>
+      <div>
         <div className='d-flex flex-row'>
-          {draw[0]}
-          {draw[1]}
-          {draw[2]}
-          {draw[3]}
-          {draw[4]}
-          {draw[5]}
-          {draw[6]}
-          {draw[7]}
-          {draw[8]}
+          {line1}
         </div>
         <div className='d-flex flex-row'>
-          {draw[9]}
-          {draw[10]}
-          {draw[11]}
-          {draw[12]}
-          {draw[13]}
-          {draw[14]}
-          {draw[15]}
-          {draw[16]}
-          {draw[17]}
+          {line2}
         </div>
         <div className='d-flex flex-row'>
-          {draw[18]}
-          {draw[19]}
-          {draw[20]}
-          {draw[21]}
-          {draw[22]}
-          {draw[23]}
-          {draw[24]}
-          {draw[25]}
-          {draw[26]}
+          {line3}
         </div>
         <div className='d-flex flex-row'>
-          {draw[27]}
-          {draw[28]}
-          {draw[29]}
-          {draw[30]}
-          {draw[31]}
-          {draw[32]}
-          {draw[33]}
-          {draw[34]}
-          {draw[35]}
+          {line4}
         </div>
         <div className='d-flex flex-row'>
-          {draw[36]}
-          {draw[37]}
-          {draw[38]}
-          {draw[39]}
-          {draw[40]}
-          {draw[41]}
-          {draw[42]}
-          {draw[43]}
-          {draw[44]}
+          {line5}
         </div>
         <div className='d-flex flex-row'>
-          {draw[45]}
-          {draw[46]}
-          {draw[47]}
-          {draw[48]}
-          {draw[49]}
-          {draw[50]}
-          {draw[51]}
-          {draw[52]}
-          {draw[53]}
+          {line6}
         </div>
         <div className='d-flex flex-row'>
-          {draw[54]}
-          {draw[55]}
-          {draw[56]}
-          {draw[57]}
-          {draw[58]}
-          {draw[59]}
-          {draw[60]}
-          {draw[61]}
-          {draw[62]}
+          {line7}
         </div>
         <div className='d-flex flex-row'>
-          {draw[63]}
-          {draw[64]}
-          {draw[65]}
-          {draw[66]}
-          {draw[67]}
-          {draw[68]}
-          {draw[69]}
-          {draw[70]}
-          {draw[71]}
+          {line8}
         </div>
         <div className='d-flex flex-row'>
-          {draw[72]}
-          {draw[73]}
-          {draw[74]}
-          {draw[75]}
-          {draw[76]}
-          {draw[77]}
-          {draw[78]}
-          {draw[79]}
-          {draw[80]}
+          {line9}
         </div>
       </div>
     );
