@@ -23,9 +23,7 @@ class Board extends React.Component {
     return (' ' + (4 - parseInt(position / 9)).toString()).slice(-2);
   }
 
-  render() {
-    const current = this.props.board.slice();
-
+  drawBoard(current) {
     // draw the board
     let board = [], line = [];
     for (let i = 0; i < current.length; i++) {
@@ -45,10 +43,15 @@ class Board extends React.Component {
         line = [];
       }
     }
+    return board;
+  }
+
+  render() {
+    const current = this.props.board.slice();
 
     return (
       <div>
-        {board}
+        {this.drawBoard(current)}
       </div>
     );
   }
@@ -228,6 +231,7 @@ class Game extends React.Component {
   }
 
   handleButtonOnClick() {
+    // start interval, run a command every ${delayTime} ms
     this.timerId = setInterval(() => this.runScript(), delayTime);
   }
 
