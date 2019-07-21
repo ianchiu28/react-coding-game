@@ -22,7 +22,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const current = this.props.map.slice();
+    const current = this.props.board.slice();
 
     // draw the board
     let board = [], line = [];
@@ -57,7 +57,7 @@ class Game extends React.Component {
     super(props);
     this.handleButtonOnClick = this.handleButtonOnClick.bind(this);
     this.state = {
-      map: [
+      board: [
         'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
@@ -80,7 +80,7 @@ class Game extends React.Component {
 
   actionMove() {
     this.setState({
-      map: [
+      board: [
         'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
@@ -134,7 +134,7 @@ class Game extends React.Component {
           <button onClick={this.handleButtonOnClick}>Go!</button>
         </div>
         <div className='game-board'>
-          <Board map={this.state.map}/>
+          <Board board={this.state.board}/>
         </div>
       </div>
     );
