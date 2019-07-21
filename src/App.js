@@ -49,12 +49,7 @@ class Board extends React.Component {
 
 	render() {
 		const current = this.props.board.slice();
-
-		return (
-			<div>
-				{this.drawBoard(current)}
-			</div>
-		);
+		return this.drawBoard(current);
 	}
 }
 
@@ -231,7 +226,7 @@ class Game extends React.Component {
 
 	render() {
 	    return (
-      		<div className='game h-100'>
+      		<div className='game h-100 d-flex flex-column justify-content-center align-items-center'>
         		<div className='game-info'>
           			<h1>this is game-info</h1>
           			<h1>Direction: {this.state.direction}</h1>
