@@ -3,32 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 
 class Block extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      coordinateX: props.coordinateX,
-      coordinateY: props.coordinateY,
-      value: props.value
-    };
-  }
-
   render() {
     return (
       <div className='border border-dark rounded'>
-        {this.state.value + '(' + this.state.coordinateX + ',' + this.state.coordinateY + ')'}
+        {this.props.value + '(' + this.props.coordinateX + ',' + this.props.coordinateY + ')'}
       </div>
     );
   }
 }
 
 class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      board: props.map
-    };
-  }
-
   coordinateX(position) {
     return (' ' + (-4 + (position % 9)).toString()).slice(-2);
   }
@@ -38,7 +22,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const current = this.state.board.slice();
+    const current = this.props.map.slice();
 
     // draw the board
     let board = [], line = [];
@@ -73,7 +57,7 @@ class Game extends React.Component {
     super(props);
     this.handleButtonOnClick = this.handleButtonOnClick.bind(this);
     this.state = {
-      defaultMap: [
+      map: [
         'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
@@ -86,15 +70,56 @@ class Game extends React.Component {
       ],
       script: [
         'move',
-        'turnLeft',
-        'turnRight'
+        // 'turnLeft',
+        // 'move',
+        // 'turnRight',
+        // 'move'
       ]
     }
   }
 
+  actionMove() {
+    this.setState({
+      map: [
+        'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'CN', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+        'C', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'D'
+      ]
+    });
+  }
+
+  actionTurnLeft() {
+
+  }
+
+  actionTurnRight() {
+
+  }
+
   runScript() {
     const script = this.state.script.slice();
-    alert(script);
+    for (let i = 0; i < script.length; i++) {
+      switch(script[i]) {
+        case 'move':
+          console.log('move');
+          this.actionMove();
+          break;
+        case 'turnLeft':
+          console.log('turn left');
+          break;
+        case 'turnRight':
+          console.log('turn right');
+          break;
+        default:
+          alert('Error: undefined script!');
+      }
+    }
   }
 
   handleButtonOnClick() {
@@ -109,7 +134,7 @@ class Game extends React.Component {
           <button onClick={this.handleButtonOnClick}>Go!</button>
         </div>
         <div className='game-board'>
-          <Board map={this.state.defaultMap}/>
+          <Board map={this.state.map}/>
         </div>
       </div>
     );
