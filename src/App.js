@@ -3,10 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 
 class Block extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      coordinateX: props.coordinateX,
+      coordinateY: props.coordinateY,
+      value: props.value
+    };
+  }
+
   render() {
     return (
       <div className='border border-dark rounded'>
-        {this.props.value}
+        {this.state.value + '(' + this.state.coordinateX + ',' + this.state.coordinateY + ')'}
       </div>
     );
   }
@@ -20,8 +29,12 @@ class Board extends React.Component {
     };
   }
 
-  coordinate(position) {
-    return (-4 + (position % 9)).toString() + ',' + (4 - parseInt(position / 9)).toString();
+  coordinateX(position) {
+    return (-4 + (position % 9)).toString();
+  }
+
+  coordinateY(position) {
+    return (4 - parseInt(position / 9)).toString();
   }
 
   render() {
@@ -30,7 +43,13 @@ class Board extends React.Component {
     // draw the board
     let board = [], line = [];
     for (let i = 0; i < current.length; i++) {
-      line.push(<Block value={this.coordinate(i)}/>);
+      line.push(
+        <Block
+          value={' '}
+          coordinateX={this.coordinateX(i)}
+          coordinateY={this.coordinateY(i)}
+        />
+      );
 
       // new line
       let newLineIndex = i % 9;
