@@ -62,12 +62,13 @@ class Game extends React.Component {
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'cN', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'c', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'C', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'D'
       ],
+      direction: 'W',
       script: [
         'move',
         // 'turnLeft',
@@ -79,19 +80,56 @@ class Game extends React.Component {
   }
 
   actionMove() {
+    // calculate where to go
+    let carIndex = this.state.board.findIndex(e => e === 'c');
+    let direction = this.state.direction;
+    let newCarIndex;
+    switch (direction) {
+      case 'N':
+        newCarIndex = carIndex - 9;
+
+        // hit wall
+        if (newCarIndex < 0) {
+          return true
+        }
+        break;
+      case 'S':
+        newCarIndex = carIndex + 9;
+
+        // hit wall
+        if (newCarIndex > 80) {
+          return true
+        }
+        break;
+      case 'E':
+        newCarIndex = carIndex + 1;
+
+        // hit wall
+        if (newCarIndex % 9 === 0) {
+          return true
+        }
+        break;
+      case 'W':
+        newCarIndex = carIndex - 1;
+
+        // hit wall
+        if (newCarIndex % 9 === 8) {
+          return true
+        }
+        break;
+    }
+
+    // update board
+    let newBoard = this.state.board.slice();
+    let tmp = newBoard[carIndex];
+    newBoard[carIndex] = newBoard[newCarIndex];
+    newBoard[newCarIndex] = tmp;
     this.setState({
-      board: [
-        'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
-        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'CN', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'C', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'D'
-      ]
+      board: newBoard
     });
+
+    // move success
+    return false;
   }
 
   actionTurnLeft() {
@@ -105,10 +143,10 @@ class Game extends React.Component {
   runScript() {
     const script = this.state.script.slice();
     for (let i = 0; i < script.length; i++) {
-      switch(script[i]) {
+      let isHitWall;
+      switch (script[i]) {
         case 'move':
-          console.log('move');
-          this.actionMove();
+          isHitWall = this.actionMove();
           break;
         case 'turnLeft':
           console.log('turn left');
@@ -118,6 +156,11 @@ class Game extends React.Component {
           break;
         default:
           alert('Error: undefined script!');
+      }
+
+      if (isHitWall) {
+        alert('Game Over!');
+        return;
       }
     }
   }
