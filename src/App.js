@@ -1,4 +1,5 @@
 import React from 'react';
+import getScript from './Script';
 import logo from './logo.svg';
 import './App.css';
 
@@ -246,7 +247,7 @@ class Game extends React.Component {
 
 function App() {
 	return (
-	    <Game />
+	    <Game script={getScript()}/>
   	);
 
   // return (
