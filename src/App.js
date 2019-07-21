@@ -77,7 +77,7 @@ class Game extends React.Component {
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-        'r', 'r', 'r', 'r', 'c', 'r', 'r', 'r', 'r',
+        'r', 'r', 'r', 'r', 'cN', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
         'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
@@ -86,11 +86,16 @@ class Game extends React.Component {
     }
   }
 
+  handleButtonOnClick() {
+    alert('lalalaaaaa');
+  }
+
   render() {
     return (
       <div className='game'>
         <div className='game-info'>
           <h1>this is game-info</h1>
+          <button onClick={this.handleButtonOnClick}>Go!</button>
         </div>
         <div className='game-board'>
           <Board map={this.state.defaultMap}/>
