@@ -18,6 +18,16 @@ const writeScript = () => {
     turnRight();
     move();
 
+    turnRight();
+    move();
+    move();
+    move();
+    move();
+    move();
+    move();
+    move();
+    move();
+
 
     ////////////////////////////////////////////////
     //  ↑↑↑  ↑↑↑  把程式碼寫這條線以上唷  ↑↑↑  ↑↑↑  //

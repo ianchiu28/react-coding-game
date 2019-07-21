@@ -33,21 +33,13 @@ class Block extends React.Component {
 
     	return (
       		<div className={blockClass}>
-        		{this.props.value + '(' + this.props.coordinateX + ',' + this.props.coordinateY + ')'}
+        		{this.props.value}
       		</div>
     	);
   	}
 }
 
 class Board extends React.Component {
-	coordinateX(position) {
-		return (' ' + (-4 + (position % 9)).toString()).slice(-2);
-	}
-
-	coordinateY(position) {
-		return (' ' + (4 - parseInt(position / 9)).toString()).slice(-2);
-	}
-
 	drawBoard(current, direction) {
 		// draw the board
 		let board = [], line = [];
@@ -56,8 +48,6 @@ class Board extends React.Component {
 				<Block
 					key={i.toString()}
 					value={current[i]}
-					coordinateX={this.coordinateX(i)}
-					coordinateY={this.coordinateY(i)}
 					direction={direction}
 				/>
 			);
@@ -145,9 +135,11 @@ class Game extends React.Component {
 
 		// update board
 		let newBoard = this.state.board.slice();
-		let tmp = newBoard[carIndex];
-		newBoard[carIndex] = newBoard[newCarIndex];
-		newBoard[newCarIndex] = tmp;
+		// let tmp = newBoard[carIndex];
+		// newBoard[carIndex] = newBoard[newCarIndex];
+		// newBoard[newCarIndex] = tmp;
+		newBoard[newCarIndex] = newBoard[carIndex];
+		newBoard[carIndex] = 'r';
 		this.setState({
 			board: newBoard
 		});
@@ -255,7 +247,6 @@ class Game extends React.Component {
       		<div className='game h-100 d-flex flex-column justify-content-center align-items-center'>
         		<div className='game-info mb-5'>
           			<h1>DHC Go Go Car</h1>
-          			<h1>Direction: {this.state.direction}</h1>
           			<button onClick={this.handleButtonOnClick}>Go!</button>
         		</div>
         		<div className='game-board mb-5'>
