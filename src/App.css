@@ -26,6 +26,10 @@ html,body {
     background: #FFFFFF;
 }
 
+.obstacle {
+    background: #000000;
+}
+
 .target {
     background: #A0DFFF;
     background-repeat: no-repeat;
