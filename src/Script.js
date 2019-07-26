@@ -5,32 +5,15 @@ const writeScript = () => {
     // 輸入 turnLeft(); 就會往左轉
     // 輸入 turnRight(); 就會往右轉
     // 請使用這三個指令來操控小車！
-    
+
     ////////////////////////////////////////////////
     //  ↓↓↓  ↓↓↓  把程式碼寫這條線以下唷  ↓↓↓  ↓↓↓  //
     ////////////////////////////////////////////////
     
 
-    move();
     turnLeft();
     move();
     turnRight();
-    move();
-    move();
-    turnLeft();
-    move();
-    move();
-    move();
-    turnRight();
-    move();
-
-    turnRight();
-    move();
-    move();
-    move();
-    move();
-    move();
-    move();
     move();
     move();
 
