@@ -10,6 +10,8 @@ class Block extends React.Component {
 		let blockClass = 'block border border-dark rounded';
 		if (this.props.value === 'r') {
 			blockClass += ' road';
+		} else if (this.props.value === 'x') {
+			blockClass += ' obstacle';
 		} else if (this.props.value === 'c') {
 			blockClass += ' car';
 			switch (this.props.direction) {
@@ -28,7 +30,6 @@ class Block extends React.Component {
 				default:
 					alert('Error: undefind direction!');
 			}
-			
 		} else {
 			blockClass += ' target';
 		}
@@ -85,15 +86,15 @@ class Game extends React.Component {
 		this.handleButtonOnClick = this.handleButtonOnClick.bind(this);
 		this.state = {
 			board: [
-				'A', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'B',
-				'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-				'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-				'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+				'A', 'x', 'X', 'r', 'r', 'r', 'B', 'r', 'r',
+				'r', 'x', 'x', 'x', 'x', 'r', 'r', 'x', 'x',
+				'r', 'r', 'r', 'S', 'r', 'x', 'r', 'r', 'r',
+				'x', 'x', 'r', 'r', 'r', 'x', 'x', 'x', 'r',
 				'r', 'r', 'r', 'r', 'c', 'r', 'r', 'r', 'r',
-				'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-				'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-				'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-				'C', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'D'
+				'r', 'r', 'x', 'x', 'x', 'r', 'r', 'r', 'r',
+				'r', 'x', 'C', 'r', 'r', 'x', 'x', 'r', 'x',
+				'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'x',
+				'r', 'r', 'r', 'r', 'r', 'r', 'D', 'x', 'x'
 			],
 			direction: 'N',
 			script: props.script
@@ -145,9 +146,12 @@ class Game extends React.Component {
 
 		// update board
 		let newBoard = this.state.board.slice();
-		// let tmp = newBoard[carIndex];
-		// newBoard[carIndex] = newBoard[newCarIndex];
-		// newBoard[newCarIndex] = tmp;
+		
+		// hit the obstacle
+		if (newBoard[newCarIndex] === 'x') {
+			return true;
+		}
+
 		newBoard[newCarIndex] = newBoard[carIndex];
 		newBoard[carIndex] = 'r';
 		this.setState({
